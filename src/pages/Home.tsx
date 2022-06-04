@@ -1,3 +1,7 @@
+import { FormEvent, useState } from "react";
+import Counter from "./Counter";
+import Users from "./Users";
+
 interface headerProps {
     heading: string
 }
@@ -54,9 +58,9 @@ const Home = ({ heading }: headerProps) => {
         age: number,
         hobby: string
     }
-    const person1 : Person = {
+    const person1: Person = {
         name: 'Sohag',
-        age: 22, 
+        age: 22,
         hobby: 'watching movies'
     }
 
@@ -65,9 +69,32 @@ const Home = ({ heading }: headerProps) => {
         return total;
     }
 
+
+    
+
+    interface User {
+        name: string,
+        age: number
+    }
+    const [user, setUser] = useState<User | null>(null);
+    const userSubmit = (e: FormEvent<HTMLFormElement>): void => {
+        e.preventDefault();
+        const userData = {
+            name: 'Sayem',
+            age: 23
+        }
+        setUser(userData);
+        console.log(user);
+    }
+
     return (
         <div>
-            <h2>{heading}</h2>
+            <Counter/>
+            <br />
+            <form onSubmit={userSubmit}>
+                <input type="submit" value="Submit" />
+            </form>
+            <Users/>
         </div>
     );
 };
